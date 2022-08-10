@@ -1,49 +1,57 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Box = styled.div`
-    background: ${props => props.color || 'blue'};
-    padding: 1rem;
-    display: flex;
+const FixButton = styled.button`
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid lightgray;
+  color: gray;
+  background: white;
 `;
 
-const Button = styled.button`
-    background: white;
-    color: black;
-    border-radius: 4px;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    font-size: 1rem;
-    font-weight: 600;
+const VarButton = styled.button`
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid lightgray;
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    ${props =>
-        props.inverted &&
-        css`
-            background: none;
-            border: 2px solid white;
-            color: white;
-            &:hover {
-                background: white;
-                color: black;
-            }
-        `};
-    & + button {
-        margin-left: 1rem;
-    }
+  color: ${(props) => props.color || "gray"};
+  background: ${(props) => props.background || "white"};
 `;
 
-const StyledComponent = () => {
-    <Box color="black">
-        <Button>안녕하세요</Button>
-        <Button inverted={true}>테두리만</Button>
-    </Box>
-};
+const CssButton = styled.button`
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid lightgray;
 
-export default StyledComponent;
+  ${(props) =>
+    props.primary &&
+    css`
+      color: white;
+      background: navy;
+      border-color: navy;
+    `}
+`;
+
+export function FixStyledButton({children}) {
+    return <FixButton>{children}</FixButton>;
+}
+
+export function VarStyledButton({ children, color, background }) {
+    return (
+        <VarButton color={color} background={background} Î>
+        {children}
+        </VarButton>
+    );
+}
+
+export function CssStyledButton({ children, ...props }) {
+    return <CssButton {...props}>{children}</CssButton>;
+}
+
+export default {FixStyledButton, VarStyledButton, CssStyledButton};

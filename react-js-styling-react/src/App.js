@@ -1,9 +1,25 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import StyledComponent from './StyledComponent';
+import {FixStyledButton, VarStyledButton, CssStyledButton} from './StyledComponent';
 
 function App() {
-  return <StyledComponent />;
+  return <div>
+    <div>
+      <FixStyledButton>
+        Hello World
+      </FixStyledButton>
+    </div>
+    <div>
+      <VarStyledButton color='green' background='light gray'>
+        Hello World
+      </VarStyledButton>
+    </div>
+    <div>
+      <CssStyledButton>
+        Hello World
+      </CssStyledButton>
+    </div>
+  </div>;
 }
 
 export default App;
