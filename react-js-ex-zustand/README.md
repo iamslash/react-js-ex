@@ -39,4 +39,11 @@ $ vim .vscode/settings.json
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 # Install Prettier Formatter for Visual Studio Code
+
+# Install zustand
+$ yarn add zustand
 ```
+
+# Materials
+
+- [[Zustand] 초간단 전역 상태관리! (ft.Typescript)](https://velog.io/@hinyc/Zustand-%EC%B4%88%EA%B0%84%EB%8B%A8-%EC%A0%84%EC%97%AD-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-ft.Typescript)
