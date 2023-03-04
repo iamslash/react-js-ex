@@ -1,28 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
+import Article from './Article';
+
+interface ArticleProps {
+  title: string;
+  content: string;
+}
 
 function App() {
   const [count, setCount] = useState(0);
 
+  useEffect(() => {
+    console.log('mounted');
+  }, []);
+
+  useEffect(() => {
+    console.log('updated')
+  });
+
+  useEffect(() => {
+    return () => {
+        console.log('unmount');
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <div className="App">      
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <Article title="Trip Planning" content="Lorem ipsum dolor sit amet" />
+        <Article title="Trip Planning2" content="Lorem ipsum dolor sit amet2" />
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </div>
   );
 }
