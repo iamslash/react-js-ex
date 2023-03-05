@@ -3,20 +3,13 @@ import './App.css';
 import Article from './Article';
 import { useStore } from './store';
 import Button from '@mui/material/Button';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-interface ArticleProps {
+interface Article {
+  id: number;
   title: string;
-  content: string;
-}
-
-interface Profile {
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
+  description: string;
 }
 
 const apiClient = axios.create({
@@ -26,30 +19,17 @@ const apiClient = axios.create({
   },
 });
 
-const findById = async (id: any) => {
-  const response = await apiClient.get<Profile>(`/profiles/${id}`);
+const fetchArticles = async () => {
+  const response = await apiClient.get<Article>(`/articles`);
   return response.data;
 };
 
 function App() {
   const { count, setCount } = useStore();
 
-  const { isLoading: isLoadingProfile, refetch: getProfileById } = useQuery<Profile, Error>(
-    'query-profile-by-id',
-    async () => {
-      return await findById(1);
-    },
-    {
-      enabled: false,
-      retry: 1,
-      onSuccess: (res) => {
-        console.log(res);
-      },
-      onError: (err: any) => {
-        console.error(err.response?.data || err);
-      },
-    },
-  );
+  const { isLoading, error, data } = useQuery<Article[]>(['articles'], fetchArticles, {
+    keepPreviousData: true,
+  });
 
   useEffect(() => {
     console.log('mounted');
@@ -65,17 +45,24 @@ function App() {
     };
   }, []);
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error fetching feeds</div>;
+
   return (
     <div className="App">
       <div className="card">
         <Button variant="contained" onClick={() => setCount(count + 1)}>
           count is {count}
         </Button>
-        <Button variant="contained" onClick={() => getProfileById()}>
-          axios
-        </Button>
         <Article title="Trip Planning" content="Lorem ipsum dolor sit amet" />
         <Article title="Trip Planning2" content="Lorem ipsum dolor sit amet2" />
+      </div>
+      <div>
+        {data &&
+          data.articles?.map((article: Article) => (
+            <Article title={article.title} content={article.description} />
+          ))}
+        {/* <button onClick={() => setPage((old) => old + 1)}>Next Page</button> */}
       </div>
     </div>
   );

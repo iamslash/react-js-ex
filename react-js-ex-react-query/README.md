@@ -48,3 +48,5 @@ $ yarn add zustand
 
 - [React Query and Axios (Typescript) example with Rest API | bezkoder](https://www.bezkoder.com/react-query-axios-typescript/)
 - [React Query 사용해보기 | velog](https://velog.io/@godud2604/React-Query-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0)
+- [react-query](https://kyounghwan01.github.io/blog/React/react-query/basic/#react-query-%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%8C%E1%85%A5%E1%86%B7)
+- [Realworld conduit api-docs](https://api.realworld.io/api-docs/#/Articles/GetArticles)
